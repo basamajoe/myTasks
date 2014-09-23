@@ -2,7 +2,11 @@ package com.javalabs.web.controllers;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,10 +19,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalabs.web.dao.TaskAction;
+import com.javalabs.web.dao.TaskActionVO;
 import com.javalabs.web.dao.User;
 import com.javalabs.web.dao.UserPropertyEditor;
 import com.javalabs.web.service.TaskActionService;
@@ -77,5 +85,46 @@ public class TaskActionController {
 
 			return "tasklst";
 		}
+	}
+
+	@RequestMapping(value = "/taskaction/get/{id}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getAction(Principal principal,
+			@PathVariable Long id) {
+		logger.info("Task controller /taskaction/get...");
+
+		TaskAction action = null;
+
+		if (principal == null) {
+			action = new TaskAction();
+		} else {
+			action = taskActionService.get(id);
+		}
+
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("action", action);
+
+		return data;
+	}
+
+	@RequestMapping(value = "/taskaction/send", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> sendAction(Principal principal,
+			@RequestBody TaskActionVO ta) {
+		logger.info("Task controller /taskaction/send ...");
+		// , @PathVariable Long id
+		String actionname = (String) ta.getActionname();
+
+		System.out.println("**TaskActionController**>>>>>>" + ta.getActionname() + ">" + ">"
+				+ ta.getIdTaskAction() + ">" + ta.getDescription() + ">"
+				+ ta.getDescription() + ">" + ta.getIdTask());
+
+		Map<String, Object> rdata = new HashMap<String, Object>();
+
+		TaskAction action = null;
+
+		rdata.put("success", true);
+
+		return rdata;
 	}
 }

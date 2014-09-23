@@ -39,6 +39,12 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/task/lst"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/taskaction/upd"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/taskaction/get/*"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/taskaction/send"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/getactions/**"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/static/**"

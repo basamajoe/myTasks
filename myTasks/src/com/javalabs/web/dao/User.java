@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "t_user")
@@ -34,7 +37,7 @@ public class User {
 			FormValidationGroup.class })
 	@Column(name = "username")
 	private String username;
-	
+	@JsonIgnore
 	@NotBlank(groups = {FormValidationGroup.class })
 	@Size(min = 5, max = 50, groups = { FormValidationGroup.class })
 	private String password;
@@ -48,6 +51,7 @@ public class User {
 	private String aka = "";
 	private Date timestamp;
 	@ManyToMany(cascade = { CascadeType.ALL })
+	@JsonIgnore
 	@JoinTable(name = "r_userrole", joinColumns = { @JoinColumn(name = "idUser") }, inverseJoinColumns = { @JoinColumn(name = "idRole") })
 	private Set<Role> roles = new HashSet<Role>();
 	

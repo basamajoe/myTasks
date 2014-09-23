@@ -2,62 +2,36 @@ package com.javalabs.web.dao;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class TaskActionVO {
 
-import org.apache.commons.collections.functors.FalsePredicate;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-@Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskAction")
-@Table(name = "t_taskaction")
-public class TaskAction {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idTaskAction")
 	private long idTaskAction;
-	@ManyToOne
-	@JoinColumn(name = "idTask", nullable = false)
-	private Task task;
-	@Column(name = "date")
+	private long idTask;
 	private Date date;
 	private String actionname;
 	private String description;
 	private int duration;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUser", nullable = false)
-	private User user;
-	@Column(name = "timestamp")
+	private long idUser;
 	private Date timestamp;
 
-	public TaskAction() {
+	public TaskActionVO() {
 	}
 
-	/**
-	 * @author Joe Sanchez
-	 * @param task
-	 * @param date
-	 * @param action
-	 * @param description
-	 * @param user
-	 */
-	public TaskAction(Task task, Date date, String action, String description,
-			User user) {
-		this.task = task;
+	public TaskActionVO(long idTask, Date date, String action,
+			String description, long idUser) {
+		this.idTask = idTask;
 		this.date = new Date((date.getTime() / 1000) * 1000);
 		this.actionname = action;
 		this.description = description;
-		this.user = user;
+		this.idUser = idUser;
+	}
+
+	public TaskActionVO(long idTask, long idTaskAction, String actionname,
+			String description) {
+		this.idTask = idTask;
+		this.idTaskAction = idTaskAction;
+		this.date = new Date((date.getTime() / 1000) * 1000);
+		this.actionname = actionname;
+		this.description = description;
 	}
 
 	public long getIdTaskAction() {
@@ -68,12 +42,12 @@ public class TaskAction {
 		this.idTaskAction = idTaskAction;
 	}
 
-	public Task getTask() {
-		return task;
+	public long getIdTask() {
+		return idTask;
 	}
 
-	public void setTask(Task task) {
-		this.task = task;
+	public void setIdTask(long idTask) {
+		this.idTask = idTask;
 	}
 
 	public Date getDate() {
@@ -108,12 +82,12 @@ public class TaskAction {
 		this.duration = duration;
 	}
 
-	public User getUser() {
-		return user;
+	public long getUser() {
+		return idUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
 
 	public Date getTimestamp() {
@@ -134,8 +108,11 @@ public class TaskAction {
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + duration;
-		result = prime * result + ((task == null) ? 0 : task.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + (int) (idTask ^ (idTask >>> 32));
+		result = prime * result + (int) (idTaskAction ^ (idTaskAction >>> 32));
+		result = prime * result + (int) (idUser ^ (idUser >>> 32));
+		result = prime * result
+				+ ((timestamp == null) ? 0 : timestamp.hashCode());
 		return result;
 	}
 
@@ -145,9 +122,9 @@ public class TaskAction {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof TaskAction))
+		if (getClass() != obj.getClass())
 			return false;
-		TaskAction other = (TaskAction) obj;
+		TaskActionVO other = (TaskActionVO) obj;
 		if (actionname == null) {
 			if (other.actionname != null)
 				return false;
@@ -165,24 +142,25 @@ public class TaskAction {
 			return false;
 		if (duration != other.duration)
 			return false;
-		if (task == null) {
-			if (other.task != null)
-				return false;
-		} else if (!task.equals(other.task))
+		if (idTask != other.idTask)
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (idTaskAction != other.idTaskAction)
+			return false;
+		if (idUser != other.idUser)
+			return false;
+		if (timestamp == null) {
+			if (other.timestamp != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!timestamp.equals(other.timestamp))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TaskAction [idTaskAction=" + idTaskAction + ", task=" + task
-				+ ", date=" + date + ", actionname=" + actionname
+		return "TaskActionVO [idTaskAction=" + idTaskAction + ", idTask="
+				+ idTask + ", date=" + date + ", actionname=" + actionname
 				+ ", description=" + description + ", duration=" + duration
-				+ ", user=" + user + ", timestamp=" + timestamp + "]";
+				+ ", idUser=" + idUser + ", timestamp=" + timestamp + "]";
 	}
 }

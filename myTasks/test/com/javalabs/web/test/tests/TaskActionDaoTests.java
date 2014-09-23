@@ -21,6 +21,7 @@ import com.javalabs.web.dao.Category;
 import com.javalabs.web.dao.CategoryDao;
 import com.javalabs.web.dao.Priority;
 import com.javalabs.web.dao.PriorityDao;
+import com.javalabs.web.dao.Role;
 import com.javalabs.web.dao.State;
 import com.javalabs.web.dao.StateDao;
 import com.javalabs.web.dao.Task;
@@ -167,17 +168,22 @@ public class TaskActionDaoTests {
 		Task t1 = new Task("My first task", "This is a task", rightnow,
 				rightnow, category, priority, state, user, user, "okey", 0);
 
-		taskDao.saveOrUpdate(t1);
 
-		TaskAction ta1 = new TaskAction(t1, rightnow, "Task action 1",
+		TaskAction ta1 = new TaskAction(t1, rightnow, "Task actionn 1",
 				"Task action 1 description", user);
 
-		taskActionDao.saveOrUpdate(ta1);
+		t1.addAction(ta1);
+		taskDao.saveOrUpdate(t1);
 
+		assertNotNull("TaskAction with ID " + ta1.getIdTaskAction()
+				+ " should not be null (deleted, actual)", ta1);
+		
 		long idTaskAction = ta1.getIdTaskAction();
 		taskActionDao.delete(idTaskAction);
-		assertTrue("TaskAction deletion should return true",
-				null == taskActionDao.get(idTaskAction));
+		
+		TaskAction taR2 = taskActionDao.get(idTaskAction);
+		assertNull("TaskAction with ID " + idTaskAction
+				+ " should be null (deleted, actual)", taR2);
 	}
 
 	@Test

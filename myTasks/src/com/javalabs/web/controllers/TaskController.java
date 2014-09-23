@@ -62,6 +62,11 @@ public class TaskController {
 	}
 
 	@Autowired
+	public void setTaskActionService(TaskActionService taskActionService) {
+		this.taskActionService = taskActionService;
+	}
+
+	@Autowired
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
@@ -282,9 +287,9 @@ public class TaskController {
 	}
 
 	// value = "/getactions/{id}" AND , @PathVariable Long id
-	@RequestMapping(value = "/getactions", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public Map<String, Object> getActions(Principal principal) {
+	@RequestMapping(value = "/getactions/{idTask}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Map<String, Object> getActions(Principal principal,
+			@PathVariable Long idTask) {
 		logger.info("Task controller get actions...");
 
 		List<TaskAction> actions = null;
@@ -292,7 +297,7 @@ public class TaskController {
 		if (principal == null) {
 			actions = new ArrayList<TaskAction>();
 		} else {
-			actions = taskActionService.getAllTaskActions();
+			actions = taskActionService.getAllTaskActions(idTask);
 		}
 
 		Map<String, Object> data = new HashMap<String, Object>();

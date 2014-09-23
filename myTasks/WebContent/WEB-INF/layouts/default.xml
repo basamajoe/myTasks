@@ -46,7 +46,9 @@
 	</definition>
 	<definition name="taskupd" extends="baseLayout">
 		<put-attribute name="title" value="Create Task" />
+		<put-attribute name="includes" value="/WEB-INF/tiles/taskupd.includes.jsp" />
 		<put-attribute name="body" value="/WEB-INF/tiles/taskupd.jsp" />
+		<put-attribute name="afterfooter" value="/WEB-INF/tiles/taskupd.afterfooter.jsp" />
 	</definition>
 	<definition name="useradd" extends="baseLayout">
 		<put-attribute name="includes" value="/WEB-INF/tiles/useradd.includes.jsp" />

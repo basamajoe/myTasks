@@ -3,6 +3,7 @@ package com.javalabs.web.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -30,13 +31,16 @@ public class UserDao {
 	public User get(long id) {
 		Criteria crit = session().createCriteria(User.class);
 		crit.add(Restrictions.idEq(id));
-		return (User)crit.uniqueResult();
+		User u = (User)crit.uniqueResult();
+		return u;
 	}
 
 	public User get(String username) {
 		Criteria crit = session().createCriteria(User.class);
 		crit.add(Restrictions.eq("username", username));
-		return (User)crit.uniqueResult();
+		User u = (User)crit.uniqueResult();
+		Hibernate.initialize(u.getRoles());
+		return u;
 	}
 
 	@SuppressWarnings("unchecked")

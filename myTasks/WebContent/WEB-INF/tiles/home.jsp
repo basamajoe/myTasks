@@ -16,7 +16,7 @@
 </p>
 <p>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<a href="<c:url value="/admin"/>">Admin</a>
+		<a href="<c:url value="/admin" />">Admin</a>
 	</sec:authorize>
 </p>
 <p>

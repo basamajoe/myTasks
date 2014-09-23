@@ -19,9 +19,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 //import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTask")
 @Table(name = "t_task")
 public class Task {
 
@@ -58,7 +63,7 @@ public class Task {
 	private String evaluation;
 	@Column(name = "pending")
 	private int pending;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task", orphanRemoval = true)
 	private List<TaskAction> actions = new ArrayList<TaskAction>();
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
@@ -225,19 +230,19 @@ public class Task {
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
-	
+
 	public List<TaskAction> getActions() {
 		return actions;
 	}
-	
+
 	public void setActions(List<TaskAction> actions) {
 		this.actions = actions;
 	}
-	
-	public void addAction(TaskAction a){
+
+	public void addAction(TaskAction a) {
 		this.actions.add(a);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Task [idTask=" + idTask + ", taskname=" + taskname

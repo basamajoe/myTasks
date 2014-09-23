@@ -59,8 +59,5 @@ public class TaskDao {
 	public void delete(long id) {
 		Task taskToDel = (Task) session().load(Task.class, id);
 		session().delete(taskToDel);
-		// Query query = session().createQuery("delete from Task where idTask=:id");
-		// query.setLong("id", id);
-		//return query.executeUpdate() == 1;
 	}
 }

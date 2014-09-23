@@ -131,53 +131,15 @@
 </form:form>
 <h2>Actions</h2>
 <c:if test="${!empty task.actions}">
-	<div id="actions">
+	<div id="actions" ng-controller="ActionCtrl as act">
 		<table class="table table-striped table-condensed">
 			<c:forEach var="tmpaction" items="${task.actions}">
 				<c:set var="action" value="${tmpaction}" scope="request" />
 				<tr>
-					<td><form:form method="POST" class="form-horizontal"
-							action="${pageContext.request.contextPath}/taskaction/upd"
-							commandName="action">
-							<form:hidden path="idTaskAction" />
-							<form:hidden path="task.idTask" />
-							<div class="form-group">
-								<label for="actionname" class="col-sm-2 control-label input-sm">Actionname</label>
-								<div class="col-sm-4">
-									<form:input path="actionname" type="text"
-										cssClass="form-control input-sm" id="actionname" />
-								</div>
-								<label for="date" class="col-sm-2 control-label input-sm">Date</label>
-								<div class="col-sm-2">
-									<form:input id="date" path="date" type="datetime" value="${date }" readOnly="true"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="user" class="col-sm-2 control-label input-sm">User</label>
-								<div class="col-sm-2">
-									<form:input path="user.username" type="text"
-										cssClass="form-control input-sm" id="user" readOnly="true" />
-								</div>
-								<label for="duration" class="col-sm-2 col-sm-offset-1 control-label input-sm">Duration</label>
-								<div class="col-sm-2">
-									<form:input path="duration" type="text"
-										cssClass="form-control input-sm" id="duration" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="description" class="col-sm-2 control-label input-sm">Description</label>
-								<div class="col-sm-6">
-									<form:textarea path="description" rows="3"
-										cssClass="form-control input-sm" id="description" />
-								</div>
-								<div class="col-sm-offset-2 col-sm-2">
-									<button type="submit" class="btn btn-primary btn-xs">Save
-										Action</button>
-								</div>
-							</div>
-						</form:form></td>
+					<td><jsp:include page="taskupd.actions.jsp" /></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 </c:if>
+<div ng-view></div>

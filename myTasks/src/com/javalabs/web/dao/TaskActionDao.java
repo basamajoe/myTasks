@@ -3,6 +3,7 @@ package com.javalabs.web.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -58,8 +59,10 @@ public class TaskActionDao {
 
 	@SuppressWarnings("unchecked")
 	public List<TaskAction> getAllTaskActions() {
-		List<TaskAction> la = session().createQuery("from TaskAction").list();//createQuery("from TaskAction").list();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>> " + la.size());
+		Query q = session().createQuery("from TaskAction");
+		List<TaskAction> la = q.list();
+		//createQuery("from TaskAction").list();
+		System.out.println(">>>>>>>>>>getAllActions>>>>>>>>>>> " + la.size());
 		return la;
 	}
 
@@ -67,6 +70,7 @@ public class TaskActionDao {
 	public List<TaskAction> getAllTaskActions(long idTask) {
 		Criteria crit = session().createCriteria(TaskAction.class);
 		crit.add(Restrictions.eq("task.idTask", idTask));
+		System.out.println(">>>>>>>>getAllActions(id)>>>>>>>>>>>>> " + crit.list().size());
 		return crit.list();
 	}
 }
