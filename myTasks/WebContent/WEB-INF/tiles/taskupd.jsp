@@ -131,15 +131,20 @@
 </form:form>
 <h2>Actions</h2>
 <c:if test="${!empty task.actions}">
-	<div id="actions" ng-controller="ActionCtrl as act">
+	<div id="actions" ng-controller="ActionCtrl as act"
+		ng-init="getactions(${task.idTask})">
+		number of actions{{datas.number}}|array length{{datas.actions.length}}
 		<table class="table table-striped table-condensed">
-			<c:forEach var="tmpaction" items="${task.actions}">
+			<tr ng-repeat="action in datas.actions">
+				<td><jsp:include page="taskupd.actions.jsp" /></td>
+			</tr>
+			<%--<c:forEach var="tmpaction" items="${task.actions}">
 				<c:set var="action" value="${tmpaction}" scope="request" />
 				<tr>
 					<td><jsp:include page="taskupd.actions.jsp" /></td>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</div>
 </c:if>
-<div ng-view></div>
+<!-- <div ng-view></div> -->

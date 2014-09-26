@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- Modal -->
-<div class="modal fade" id="action${action.idTaskAction}" tabindex="-1"
-	role="dialog" aria-labelledby="action${action.idTaskAction}"
+<div class="modal fade" id="action{{action.idTaskAction}}" tabindex="-1"
+	role="dialog" aria-labelledby="action{{action.idTaskAction}}"
 	aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -16,32 +16,42 @@
 			</div>
 			<div class="modal-body">
 				<div class="table-responsive">
-					<input type="hidden" value="{{data.action.idTaskAction}}" />
-					<input type="hidden" value="{{data.action.idTask}}" />
-					<input type="hidden" value="{{data.action.user.idUser}}" />
+					<input type="hidden" ng-model="action.idTaskAction" /> <input
+						type="hidden" ng-model="action.idTask" /> <input
+						type="hidden" ng-model="action.user.idUser" />
 					<table class="table">
 						<tr>
 							<td>Actionname</td>
-							<td><input type="text" ng-model="data.action.actionname"/></td>
+							<td><input type="text" ng-model="action.actionname" /></td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td><input type="text" ng-model="action.user.username" /></td>
 						</tr>
 						<tr>
 							<td>Date</td>
-							<td><input type="datetime-local" size="16" ng-model="data.action.date"/></td>
+							<td><input type="date" name="fecha"
+								placeholder="dd-MM-yyyy HH:mm:ss" size="16"
+								ng-model="data.action.date" /></td>
+							<tt>value = {{action.date | date: "yyyy-MM-dd HH:mm:ss"}}</tt>
 						</tr>
 						<tr>
 							<td>Duration</td>
-							<td><input type="text" size="10" value="{{data.action.duration }}"/></td>
+							<td><input type="text" size="10"
+								ng-model="action.duration" /></td>
 						</tr>
 						<tr>
 							<td>Description</td>
-							<td><input type="text" value="{{data.action.description}}"/></td>
+							<td><input type="text" ng-model="action.description" /></td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" ng-click="sendaction()" class="btn btn-primary">Save changes{{data.action.idTaskAction}}</button>
+				<button type="button" ng-click="sendaction()"
+					class="btn btn-primary">Save
+					changes{{action.idTaskAction}}</button>
 			</div>
 		</div>
 	</div>

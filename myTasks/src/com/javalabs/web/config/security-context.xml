@@ -49,6 +49,8 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/static/**"
 			access="permitAll" />
+		<security:intercept-url pattern="/snippets/**"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/error"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/**" access="denyAll" />

@@ -11,6 +11,7 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/resources/" mapping="/static/**" />
+	<mvc:resources location="/html/" mapping="/snippets/**" />
 
 	<bean id="tilesViewerResolver"
 		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">

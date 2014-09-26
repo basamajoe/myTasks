@@ -2,10 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<form:hidden path="action.idTaskAction" />
+<%--<form:hidden path="action.idTaskAction" />
 <form:hidden path="task.idTask" />
-<div class="form-group">
-	<label for="actionname" class="col-sm-2 control-label input-sm">Actionname</label>
+<div class="form-group">--%>
+	<span>Actionname: {{action.actionname}}</span>
+	<span>Duration: {{action.duration}}</span>
+	<span>Description: {{action.description}}</span>
+	<span>Date: {{action.date}}</span>
+	<span>User: {{action.user.username}}</span>
+	<button ng-click="getaction(action.idTaskAction)"
+			data-toggle="modal" data-target="#action${action.idTaskAction}"
+			class="btn btn-primary btn-sm">Edit</button>
+<%-- 	<label for="actionname" class="col-sm-2 control-label input-sm">Actionname</label>
 	<div class="col-sm-4">
 		<form:input path="action.actionname" type="text"
 			cssClass="form-control input-sm" id="actionname" />
@@ -41,5 +49,5 @@
 			class="btn btn-primary btn-sm">Edit</button>
 	</div>
 </div>
-<hr />
+<hr /> --%>
 <jsp:include page="taskupd.actions.modal.jsp" />

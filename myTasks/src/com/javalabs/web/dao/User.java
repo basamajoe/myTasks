@@ -1,5 +1,6 @@
 package com.javalabs.web.dao;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,11 +21,19 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUser")
 @Table(name = "t_user")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6800575798238788490L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,14 +50,19 @@ public class User {
 	@NotBlank(groups = {FormValidationGroup.class })
 	@Size(min = 5, max = 50, groups = { FormValidationGroup.class })
 	private String password;
+	@JsonIgnore
 	@Email
 	@NotBlank
 	private String email;
+	@JsonIgnore
 	private String authority;
+	@JsonIgnore
 	private Boolean enabled = true;
+	@JsonIgnore
 	@Size(min = 3, max = 6, groups = { PersistenceValidationGroup.class,
 			FormValidationGroup.class })
 	private String aka = "";
+	@JsonIgnore
 	private Date timestamp;
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JsonIgnore

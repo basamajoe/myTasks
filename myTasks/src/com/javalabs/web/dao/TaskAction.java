@@ -1,5 +1,6 @@
 package com.javalabs.web.dao;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,16 +13,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.collections.functors.FalsePredicate;
+
+
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskAction")
 @Table(name = "t_taskaction")
-public class TaskAction {
+public class TaskAction implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2555485155531996398L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idTaskAction")
@@ -34,6 +42,7 @@ public class TaskAction {
 	private String actionname;
 	private String description;
 	private int duration;
+	@JsonInclude(Include.ALWAYS)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUser", nullable = false)
 	private User user;

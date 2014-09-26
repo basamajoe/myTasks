@@ -1,5 +1,6 @@
 package com.javalabs.web.dao;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 //import org.springframework.format.annotation.DateTimeFormat;
@@ -28,8 +31,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTask")
 @Table(name = "t_task")
-public class Task {
+public class Task implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2477946304346094823L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idTask")
@@ -63,6 +70,7 @@ public class Task {
 	private String evaluation;
 	@Column(name = "pending")
 	private int pending;
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task", orphanRemoval = true)
 	private List<TaskAction> actions = new ArrayList<TaskAction>();
 	@Column(name = "timestamp")

@@ -71,6 +71,10 @@ public class TaskActionDao {
 		Criteria crit = session().createCriteria(TaskAction.class);
 		crit.add(Restrictions.eq("task.idTask", idTask));
 		System.out.println(">>>>>>>>getAllActions(id)>>>>>>>>>>>>> " + crit.list().size());
-		return crit.list();
+		for(TaskAction ta : (List<TaskAction>)crit.list()){
+			System.out.println(">>>>>>>>ta: " + ta.getActionname());
+		}
+		System.out.println(">>>>>>>>END getAllActions()>>>>>>>>>>>>> ");
+		return (List<TaskAction>)crit.list();
 	}
 }

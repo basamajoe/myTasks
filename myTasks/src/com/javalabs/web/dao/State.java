@@ -9,7 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskState")
 @Table(name = "a_taskstate")
 public class State {
 
@@ -17,9 +22,11 @@ public class State {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "idTaskState")
 	private long idTaskState;
+	@JsonIgnore
 	private long sortOrder;
 	@Column(name = "statename")
 	private String statename;
+	@JsonIgnore
 	private Date timestamp;
 
 	public State() {
