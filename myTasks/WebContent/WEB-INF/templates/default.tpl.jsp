@@ -19,9 +19,6 @@
 	href="<c:url value="/static/css/main.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/default.css"/>">
-<!-- Angularjs from Google CND -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,10 +34,12 @@
 		<tiles:insertAttribute name="body" />
 	</div>
 	<tiles:insertAttribute name="footer" />
-
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<c:url value="/static/script/jquery.min.js" />"></script>
 	<script src="<c:url value="/static/script/bootstrap.min.js"/>"></script>
+	<!-- Angularjs from Google CND -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 	<tiles:insertAttribute name="afterfooter" />
 </body>
 </html>

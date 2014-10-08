@@ -5,7 +5,7 @@
 <div class="container">
 	<form method="POST" action="<c:url value="/j_spring_security_check" />"
 		class="form-signin" role="form">
-		<h2 class="form-signin-heading">Please sign in</h2>
+		<h2 class="form-signin-heading">Sign in</h2>
 		<input name="j_username" type="text" class="form-control"
 			placeholder="Username" required autofocus /> <input
 			name='j_password' type="password" class="form-control"
@@ -18,13 +18,10 @@
 		</c:if>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 			in</button>
-		<label class="checkbox"> <input type="checkbox"
+		<label class="checkbox"> <input type="checkbox" checked="checked"
 			name="_spring_security_remember_me" value="remember-me">
 			Remember me
 		</label>
 	</form>
 </div>
-<p>
-	<a href="<c:url value="/createuser"/>">Create new account</a>
-</p>
 <!-- end container -->

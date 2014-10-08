@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskState")
+@JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idTaskState")
 @Table(name = "a_taskstate")
 public class State {
 

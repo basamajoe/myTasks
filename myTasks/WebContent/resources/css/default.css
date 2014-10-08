@@ -1,4 +1,23 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
 body {
-	min-height: 2000px;
-	padding-top: 70px;
+	margin: 0 0 0px;
+	padding: 0 0 0px;
+  	<!--padding: 70px 0 70px;-->
+}
+
+footer {
+	background-color: #c0c0c0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 100px;
+	width: 100%;
+}
+
+#menu{
+	padding: 15px 0 0 0;
 }

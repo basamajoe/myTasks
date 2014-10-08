@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 //import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTask")
+@JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idTask")
 @Table(name = "t_task")
 public class Task implements Serializable {
 
@@ -48,6 +48,7 @@ public class Task implements Serializable {
 	private String description;
 	@Column(name = "date")
 	private Date date;
+	@JsonIgnore
 	@Column(name = "deadline")
 	private Date deadline;
 	@NotNull
@@ -60,12 +61,15 @@ public class Task implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idTaskState")
 	private State state;
+	@JsonInclude(Include.ALWAYS)
 	@ManyToOne
 	@JoinColumn(name = "idUser")
 	private User user;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idUser_responsible", nullable = true)
 	private User userResponsible;
+	@JsonIgnore
 	@Column(name = "evaluation")
 	private String evaluation;
 	@Column(name = "pending")

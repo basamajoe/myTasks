@@ -61,8 +61,6 @@ public class TaskActionDao {
 	public List<TaskAction> getAllTaskActions() {
 		Query q = session().createQuery("from TaskAction");
 		List<TaskAction> la = q.list();
-		//createQuery("from TaskAction").list();
-		System.out.println(">>>>>>>>>>getAllActions>>>>>>>>>>> " + la.size());
 		return la;
 	}
 
@@ -70,11 +68,6 @@ public class TaskActionDao {
 	public List<TaskAction> getAllTaskActions(long idTask) {
 		Criteria crit = session().createCriteria(TaskAction.class);
 		crit.add(Restrictions.eq("task.idTask", idTask));
-		System.out.println(">>>>>>>>getAllActions(id)>>>>>>>>>>>>> " + crit.list().size());
-		for(TaskAction ta : (List<TaskAction>)crit.list()){
-			System.out.println(">>>>>>>>ta: " + ta.getActionname());
-		}
-		System.out.println(">>>>>>>>END getAllActions()>>>>>>>>>>>>> ");
 		return (List<TaskAction>)crit.list();
 	}
 }

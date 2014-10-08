@@ -13,18 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskAction")
 @Table(name = "t_taskaction")
-public class TaskAction implements Serializable  {
+public class TaskAction implements Serializable {
 
 	/**
 	 * 
@@ -37,12 +32,10 @@ public class TaskAction implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name = "idTask", nullable = false)
 	private Task task;
-	@Column(name = "date")
 	private Date date;
 	private String actionname;
 	private String description;
 	private int duration;
-	@JsonInclude(Include.ALWAYS)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUser", nullable = false)
 	private User user;
@@ -60,13 +53,18 @@ public class TaskAction implements Serializable  {
 	 * @param description
 	 * @param user
 	 */
-	public TaskAction(Task task, Date date, String action, String description,
-			User user) {
+	public TaskAction(Task task, 
+	                  Date date, 
+	                  String action, 
+	                  String description, 
+	                  User user,
+	                  int duration) {
 		this.task = task;
 		this.date = new Date((date.getTime() / 1000) * 1000);
 		this.actionname = action;
 		this.description = description;
 		this.user = user;
+		this.duration = duration;
 	}
 
 	public long getIdTaskAction() {
@@ -137,11 +135,9 @@ public class TaskAction implements Serializable  {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((actionname == null) ? 0 : actionname.hashCode());
+		result = prime * result + ((actionname == null) ? 0 : actionname.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + duration;
 		result = prime * result + ((task == null) ? 0 : task.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
@@ -189,9 +185,8 @@ public class TaskAction implements Serializable  {
 
 	@Override
 	public String toString() {
-		return "TaskAction [idTaskAction=" + idTaskAction + ", task=" + task
-				+ ", date=" + date + ", actionname=" + actionname
-				+ ", description=" + description + ", duration=" + duration
-				+ ", user=" + user + ", timestamp=" + timestamp + "]";
+		return "TaskAction [idTaskAction=" + idTaskAction + ", task=" + task + ", date=" + date
+				+ ", actionname=" + actionname + ", description=" + description + ", duration="
+				+ duration + ", user=" + user + ", timestamp=" + timestamp + "]";
 	}
 }

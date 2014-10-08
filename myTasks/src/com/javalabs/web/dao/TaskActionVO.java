@@ -82,7 +82,7 @@ public class TaskActionVO {
 		this.duration = duration;
 	}
 
-	public long getUser() {
+	public long getIdUser() {
 		return idUser;
 	}
 
@@ -102,17 +102,14 @@ public class TaskActionVO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((actionname == null) ? 0 : actionname.hashCode());
+		result = prime * result + ((actionname == null) ? 0 : actionname.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + duration;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + (int) (duration ^ (duration >>> 32));
 		result = prime * result + (int) (idTask ^ (idTask >>> 32));
 		result = prime * result + (int) (idTaskAction ^ (idTaskAction >>> 32));
 		result = prime * result + (int) (idUser ^ (idUser >>> 32));
-		result = prime * result
-				+ ((timestamp == null) ? 0 : timestamp.hashCode());
+		result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
 		return result;
 	}
 

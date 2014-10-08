@@ -1,6 +1,5 @@
 package com.javalabs.web.controllers;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,9 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javalabs.web.dao.Category;
 import com.javalabs.web.dao.CategoryPropertyEditor;
 import com.javalabs.web.dao.Priority;
@@ -296,7 +292,7 @@ public class TaskController {
 	public Map<String, Object> getActions(Principal principal,
 			@PathVariable Long idTask) {
 		logger.info("Task controller get actions...");
-//List<TaskAction>
+
 		List<TaskAction> actions = null;
 
 		if (principal == null) {
@@ -304,13 +300,6 @@ public class TaskController {
 		} else {
 			actions = taskActionService.getAllTaskActions(idTask);
 		}
-
-		System.out.println(">>>>>>>>Task Controller - Actions>>>>>>>>>>>>> "
-				+ actions.size());
-		for (TaskAction ta : actions) {
-			System.out.println(">>>>>>>>ta: " + ta.getActionname());
-		}
-		System.out.println(">>>>>>>>END getAllActions()>>>>>>>>>>>>> ");
 
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("actions", actions);

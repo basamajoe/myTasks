@@ -12,13 +12,13 @@
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Edit action{{hola}}</h4>
+				<h4 class="modal-title" id="myModalLabel">Edit action</h4>
 			</div>
 			<div class="modal-body">
 				<div class="table-responsive">
-					<input type="hidden" ng-model="action.idTaskAction" /> <input
-						type="hidden" ng-model="action.idTask" /> <input
-						type="hidden" ng-model="action.user.idUser" />
+					<input type="hidden" ng-model="action.idTaskAction" />
+					<input type="hidden" ng-model="action.idTask" />
+					<input type="hidden" ng-model="action.user.idUser" />
 					<table class="table">
 						<tr>
 							<td>Actionname</td>
@@ -31,14 +31,12 @@
 						<tr>
 							<td>Date</td>
 							<td><input type="date" name="fecha"
-								placeholder="dd-MM-yyyy HH:mm:ss" size="16"
-								ng-model="data.action.date" /></td>
-							<tt>value = {{action.date | date: "yyyy-MM-dd HH:mm:ss"}}</tt>
+									placeholder="dd-MM-yyyy HH:mm:ss" size="16"
+									ng-model="data.action.date" /></td>
 						</tr>
 						<tr>
 							<td>Duration</td>
-							<td><input type="text" size="10"
-								ng-model="action.duration" /></td>
+							<td><input type="text" size="10" ng-model="action.duration" /></td>
 						</tr>
 						<tr>
 							<td>Description</td>
@@ -48,10 +46,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+				{{action.idTask}}
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" ng-click="sendaction()"
-					class="btn btn-primary">Save
-					changes{{action.idTaskAction}}</button>
+				<button type="button" ng-click="sendaction($index);closeModal($index);getactions(${task.idTask})"
+					class="btn btn-primary">Save changes{{action.idTask}}</button>
 			</div>
 		</div>
 	</div>

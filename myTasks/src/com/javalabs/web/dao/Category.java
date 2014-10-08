@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTaskCategory")
+@JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idTaskCategory")
 @Table(name = "a_taskCategory")
 public class Category {
 
